@@ -22,9 +22,10 @@ function link(value, kind, label) {
 function array(value, maximum, label) { assert(Array.isArray(value) && value.length <= maximum, `${label}: too many entries or not an array`); }
 
 export function validateIssue(issue) {
-  keys(issue, ['no', 'date', 'week', 'lead', 'new', 'bugs', 'answers', 'numbers', 'meter', 'leaders', 'watch', 'glossary'], 'issue');
+  keys(issue, ['no', 'date', 'week', 'lead', 'new', 'bugs', 'answers', 'numbers', 'meter', 'leaders', 'watch', 'glossary', ...('leadersScope' in issue ? ['leadersScope'] : [])], 'issue');
   integer(issue.no, 'no', 1);
-  assert(/^\d{4}-\d{2}-\d{2}$/.test(issue.date) && new Date(`${issue.date}T00:00:00Z`).getUTCDay() === 1, 'date: expected a Monday');
+  // The date is the publication date: the day the issue was prepared, which is not always a Monday (issue 001 was published on Saturday 10 October).
+  assert(/^\d{4}-\d{2}-\d{2}$/.test(issue.date) && new Date(`${issue.date}T00:00:00Z`).toISOString().startsWith(issue.date), 'date: expected a calendar date (YYYY-MM-DD)');
   prose(issue.week, 'week');
   keys(issue.lead, ['kicker', 'headline', 'standfirst', 'body', 'visit', 'source'], 'lead');
   for (const key of ['kicker', 'headline', 'standfirst']) prose(issue.lead[key], `lead.${key}`);
@@ -56,6 +57,7 @@ export function validateIssue(issue) {
   issue.leaders.forEach((leader, i) => {
     keys(leader, ['seat', 'jobs'], `leaders.${i}`); integer(leader.seat, `leaders.${i}.seat`); integer(leader.jobs, `leaders.${i}.jobs`);
   });
+  if ('leadersScope' in issue) assert(['this week', 'all time'].includes(issue.leadersScope), 'leadersScope: expected "this week" or "all time"');
   keys(issue.watch, ['headline', 'text', 'visit'], 'watch');
   prose(issue.watch.headline, 'watch.headline'); prose(issue.watch.text, 'watch.text'); link(issue.watch.visit, 'visit', 'watch.visit');
   assert(Array.isArray(issue.glossary) && new Set(issue.glossary).size === issue.glossary.length && issue.glossary.every(term => terms.includes(term)), 'glossary: unknown or repeated term');

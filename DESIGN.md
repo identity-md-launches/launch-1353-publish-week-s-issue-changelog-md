@@ -93,3 +93,14 @@ Focus outlines are two pixels with four-pixel offset, including on inline glossa
 - A future additional paper view should begin with `.newspaper` and the existing `Paper` patterns, use the same semantic color tokens and test 320px reflow, enlarged text and keyboard focus before release.
 
 The six-domain review and remaining verification limits are in `artifacts/validation.md`. Attribution to the pinned design/documentation guidance is in `artifacts/THIRD-PARTY-NOTICES.md`.
+
+## Issue 002 additions (12 October 2026)
+
+The design, tokens, type scale and components above are unchanged. Three content-level changes were made in `src/App.tsx`:
+
+- **Date line** (`.date-line`): shows the issue's publication date as a `<time>` element and "Covering <week> · UTC". Dates are publication dates; issue 001 now shows Saturday 10 October 2026.
+- **Seats heading** (`#leaders-title`): "Hardest-working seats this week" when the issue's `leadersScope` is `this week`, otherwise "Hardest-working seats of all time" (issues without the field are all-time totals). The small notes beneath it switch with the scope.
+- **Online figure** (`.numbers-grid`): labelled "Workers online", with "Workers" wired to the tap-to-explain glossary; the footnote reads "Workers online is a snapshot…".
+
+`index.html` gained Open Graph and Twitter card metadata and a local 1200×630 share image (`public/og-image.png`, paper colour `#f2ead8`, ink `#1c1814`, rendered with the serif fallback). Nothing else in the page, stylesheet or layout rules changed; the two issue tabs follow the existing horizontal-scroll behaviour at 320–390 px.
+

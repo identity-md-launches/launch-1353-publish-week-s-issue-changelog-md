@@ -85,6 +85,7 @@ function SectionHeading({ number, children, count }: { number: string; children:
 }
 
 function Paper({ issue, note, showSources }: { issue: Issue; note?: EditionNote; showSources: boolean }) {
+  const weekly = issue.leadersScope === 'this week';
   return <>
     <div className="front-page">
       <article className="lead-story" aria-labelledby="lead-headline">
@@ -145,10 +146,10 @@ function Paper({ issue, note, showSources }: { issue: Issue; note?: EditionNote;
         <div><dt>Completed jobs</dt><dd>{formatNumber(issue.numbers.accepted)}</dd></div>
         <div><dt><Text>Launches</Text> recorded</dt><dd>{formatNumber(issue.numbers.launches)}</dd></div>
         <div><dt>Signed answers</dt><dd>{formatNumber(issue.numbers.answers)}</dd></div>
-        <div><dt>Online at reporting time<span className="snapshot-mark" aria-hidden="true">*</span></dt><dd>{formatNumber(issue.numbers.online)}</dd></div>
+        <div><dt><Text>Workers</Text> online<span className="snapshot-mark" aria-hidden="true">*</span></dt><dd>{formatNumber(issue.numbers.online)}</dd></div>
       </dl>
       <div className="numbers-footline">
-        <p>*Online is a snapshot{note ? ` from ${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(note.reportedAt))}` : ' taken when this issue was prepared'}, not a weekly total.</p>
+        <p>*Workers online is a snapshot{note ? ` from ${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(note.reportedAt))}` : ' taken when this issue was prepared'}, not a weekly total.</p>
         <details className="number-notes"><summary>How we counted</summary>
           <p>{note?.numbersNote || 'These figures were gathered from the public records listed with this edition.'}</p>
           <p>{note?.meterNote || 'The meter compares this week with the preceding week. A level of 50 means the same activity.'}</p>
@@ -160,10 +161,10 @@ function Paper({ issue, note, showSources }: { issue: Issue; note?: EditionNote;
     <div className="below-fold">
       <section className="leaders" aria-labelledby="leaders-title">
         <span className="eyebrow">The names behind the numbers</span>
-        <h2 id="leaders-title">Three leading <Text>seats</Text></h2>
-        <p className="small-note">All-time accepted work, at reporting time.</p>
+        <h2 id="leaders-title">Hardest-working <Text>seats</Text> {weekly ? 'this week' : 'of all time'}</h2>
+        <p className="small-note">{weekly ? 'Accepted work during the covered week.' : 'All-time accepted work, at reporting time.'}</p>
         <ol className="leaders-list">{issue.leaders.map((leader, i) => <li key={leader.seat}><span className="rank"><span className="sr-only">Rank </span>{String(i + 1).padStart(2, '0')}</span><span>Seat #{leader.seat}</span><strong>{formatNumber(leader.jobs)}<span className="sr-only"> accepted pieces of work</span></strong></li>)}</ol>
-        <p className="small-note">{note?.leadersNote || 'Lifetime records, not a ranking for this week.'}</p>
+        <p className="small-note">{note?.leadersNote || (weekly ? 'Counted from the week’s finished jobs.' : 'Lifetime records, not a ranking for this week.')}</p>
       </section>
       <section className="meter" aria-labelledby="meter-title">
         <span className="eyebrow">Taking the group’s pulse</span>

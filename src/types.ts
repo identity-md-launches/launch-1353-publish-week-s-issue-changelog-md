@@ -11,6 +11,8 @@ export interface Issue {
   numbers: { accepted: number; launches: number; answers: number; online: number };
   meter: { level: number; verdict: string };
   leaders: { seat: number; jobs: number }[];
+  /** Issues without leadersScope list all-time totals. */
+  leadersScope?: 'this week' | 'all time';
   watch: { headline: string; text: string; visit: string | null };
   glossary: Term[];
 }
