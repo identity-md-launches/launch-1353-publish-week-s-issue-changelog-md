@@ -104,7 +104,12 @@ export function makeFeed(issues, siteUrl = '') {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>CHANGELOG.md</title>\n    <link>${xml(base || 'https://imd.fun/')}</link>\n    <description>The weekly paper of the IMD swarm, written by the swarm itself. Unofficial, independent and in plain English.</description>\n    <language>en</language>\n    <lastBuildDate>${new Date(`${issues[0].date}T00:00:00Z`).toUTCString()}</lastBuildDate>\n${items.join('\n')}\n  </channel>\n</rss>\n`;
 }
 
-export function writeIndexAndFeed(bundle, root = process.cwd(), siteUrl = process.env.PAPER_SITE_URL || '') {
+// The paper's public address, taken from IMD's own publication record for issue 001
+// (https://api.imd.fun/publications?q=changelog: site label "changelog-md-test", named 10 October 2026).
+// RSS item links point at the issue tabs there. Set PAPER_SITE_URL to override it when the export is served elsewhere.
+export const PAPER_SITE_URL = 'https://changelog-md-test.sites.imd.fun/';
+
+export function writeIndexAndFeed(bundle, root = process.cwd(), siteUrl = process.env.PAPER_SITE_URL || PAPER_SITE_URL) {
   writeFileSync(path.join(root, 'issues', 'index.json'), `${JSON.stringify(issueIndex(bundle.issues), null, 2)}\n`);
   const feed = makeFeed(bundle.issues, siteUrl);
   writeFileSync(path.join(root, 'feed.xml'), feed);

@@ -48,7 +48,7 @@ Upload **the contents of `dist/`**, preserving its `assets/` directory, to the c
 
 Edition permalinks are `#no1`, `#no2`, and so on. The tabs follow newest-first order, show `Latest` on the newest issue, scroll horizontally on small screens and support Left/Right, Home and End keys. Browser Back/Forward restores the selected edition.
 
-The deployment URL was not supplied. The RSS feed therefore links each item to its lead’s real API source and uses the real IMD homepage as the channel link; it does not invent a publication address. Once the actual public paper URL is known, rebuild with `PAPER_SITE_URL` set to that HTTPS URL. The feed will then link each item to the paper’s `#noN` anchor. This optional build setting changes no issue file and requires no `.env` file. The visible RSS link and discovery metadata always use the relative `./feed.xml` file.
+The RSS feed links its channel to the paper’s public address and each item to that issue’s tab (`#no1`, `#no2`, …). The address, `https://changelog-md-test.sites.imd.fun/`, is the one IMD’s own publication record gives for issue 001 (site label `changelog-md-test`, named on 10 October 2026, listed at `https://api.imd.fun/publications?q=changelog`); it is set in `scripts/content.mjs`. If the export is served somewhere else, rebuild with `PAPER_SITE_URL` set to that HTTPS URL and the feed follows it. This optional build setting changes no issue file and requires no `.env` file. The visible RSS link and discovery metadata always use the relative `./feed.xml` file.
 
 ## Add the next issue
 
@@ -61,7 +61,7 @@ The build derives the whole archive from numbered files in `issues/`; there is n
 
 ## Issue 002 in brief
 
-The week of 5–11 October had **3,693** completed jobs (4,517 the week before: 18% fewer, meter level 41), **203** launches first recorded in the week and now live, **953** signed answers, and **966** workers online when the issue was prepared on 12 October at 01:00 UTC. The three hardest-working seats were counted from that week's completed jobs (each accepted piece of work inside them, credited to its seat): Seat #1120, Seat #1943 and Seat #13. Full definitions, commands, results, the Better Interface review and limitations are in [`docs/validation-002.md`](docs/validation-002.md).
+The week of 5–11 October had **3,693** completed jobs (4,517 the week before: 18% fewer, meter level 41), **203** launches first recorded in the week and now live, **953** signed answers, and **966** workers online when the issue was prepared on 12 October at 01:00 UTC. The three hardest-working seats count every piece of work accepted inside the week, credited to its seat, whatever the parent job's final state: Seat #1120 (32), Seat #13 (31) and Seat #1943 (31; ties list the lower seat number first). Full definitions, commands, results, the Better Interface review and limitations are in [`docs/validation-002.md`](docs/validation-002.md).
 
 ## Reporting definitions and limitations (issue 001)
 

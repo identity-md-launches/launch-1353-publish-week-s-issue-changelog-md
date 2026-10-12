@@ -67,17 +67,17 @@
   "answers": [
     {
       "question": "How healthy is the IMD network right now?",
-      "summary": "Just under 99 out of 100. On 11 October a panel of 100 helpers read the network's own public records and scored three things: how many seats were online, whether its core services were up, and how many jobs finished rather than stalled. 53 of them agreed on the figure, above the 51 needed.",
+      "summary": "Just under 99 out of 100. On 11 October, 54 helpers checked the network's own public records and scored three things: how many seats were online, whether its core services were up, and how many jobs finished rather than stalled. Of those, 53 agreed on a score just under 99 out of 100, above the 51 needed.",
       "source": "https://api.imd.fun/oracle/requests/0ef60725-f09e-4d53-874c-6210dc9d1a44"
     },
     {
-      "question": "How many times did the PEPE token move in one short stretch of Ethereum?",
-      "summary": "121 times. On 5 October the swarm counted the transfers recorded for the PEPE token across 150 consecutive blocks of the Ethereum ledger, roughly half an hour. 142 helpers agreed on the count, above the 140 needed.",
+      "question": "How often did one digital currency move in half an hour?",
+      "summary": "121 recorded transfers. On 5 October, 142 helpers counted movements of the digital currency Pepe over roughly half an hour in Ethereum's public records. Their answers agreed, above the 140 needed.",
       "source": "https://api.imd.fun/oracle/requests/4e6b5f47-3361-41d9-9cdc-25b30212392e"
     },
     {
       "question": "Was it raining at London Heathrow just before midnight on 11 October?",
-      "summary": "No. Five helpers read the airport's official weather report for ten to midnight and found no rain or drizzle, with a mild 12 degrees. Four agreed, which was the number needed. The answer was folded into a single number together with the time of the reading.",
+      "summary": "No. Four helpers checked the airport's official report for ten to midnight. All four agreed that it reported no rain or drizzle and a temperature of 12 degrees, which was the number of matching answers needed. The answer was folded into a single number together with the time of the reading.",
       "source": "https://api.imd.fun/oracle/requests/95b16d02-c9ff-4ce0-b6f3-7b03cf16d6fe"
     }
   ],
@@ -85,8 +85,8 @@
   "meter": { "level": 41, "verdict": "A quieter week: 18% fewer completed jobs." },
   "leaders": [
     { "seat": 1120, "jobs": 32 },
-    { "seat": 1943, "jobs": 31 },
-    { "seat": 13, "jobs": 29 }
+    { "seat": 13, "jobs": 31 },
+    { "seat": 1943, "jobs": 31 }
   ],
   "leadersScope": "this week",
   "watch": {

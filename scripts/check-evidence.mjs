@@ -32,10 +32,13 @@ for (const issue of [...issues].reverse()) {
   assert.equal(launches.length, issue.numbers.launches, `${no}: launches`);
   assert.equal(proof.health.connectedDaemons, issue.numbers.online, `${no}: online`);
   if (issue.leadersScope === 'this week') {
+    // Weekly rule: every accepted node credited to a seat whose acceptance time falls inside the covered week
+    // (start inclusive, end exclusive) counts, whatever the parent job's final state. A blocked or still-running
+    // job does not erase work that was already accepted.
     const counts = new Map();
-    const completedIds = new Set(proof.jobs.rows.filter(row => row.state === 'completed' && within(row.updatedAt)).map(row => row.id));
     for (const node of proof.acceptedNodes) {
-      if (!completedIds.has(node.job)) continue;
+      assert(node.seat !== null && node.seat !== undefined && node.acceptedAt, `${no}: accepted node without a seat or acceptance time`);
+      if (!within(node.acceptedAt)) continue;
       counts.set(Number(node.seat), (counts.get(Number(node.seat)) || 0) + 1);
     }
     const leaders = [...counts].sort((a, b) => b[1] - a[1] || a[0] - b[0]).slice(0, 3).map(([seat, jobs]) => ({ seat, jobs }));

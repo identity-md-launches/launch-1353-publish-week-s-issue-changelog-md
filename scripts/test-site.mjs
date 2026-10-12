@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
-import { makeFeed } from './content.mjs';
+import { makeFeed, PAPER_SITE_URL } from './content.mjs';
 
 const root = process.cwd();
 const issueNumberText = n => String(n).padStart(3, '0');
@@ -212,6 +212,7 @@ try {
   const feed = await readFile('dist/feed.xml', 'utf8');
   check('Production RSS lists every issue newest first and matches root feed', (feed.match(/<item>/g) || []).length === issueCount && feed === await readFile('feed.xml', 'utf8') && (feed.indexOf(`No. ${issueNumberText(original.no)}`) < feed.indexOf('No. 001')));
   check('Publisher URL option points feed items to issue anchors', makeFeed([original], 'https://explorer.imd.fun/paper/').includes(`https://explorer.imd.fun/paper/#no${original.no}`));
+  check('Production RSS links every item to its issue tab on the paper and the channel to the paper', (feed.match(/<link>([^<]*)<\/link>/g) || []).length === issueCount + 1 && feed.includes(`<link>${PAPER_SITE_URL}</link>`) && Array.from({ length: issueCount }, (_, i) => `<link>${PAPER_SITE_URL}#no${issueCount - i}</link>`).every(link => feed.includes(link)));
   const html = await readFile('dist/index.html', 'utf8');
   check('Local script and stylesheet URLs are relative', !/(?:src|href)="\/(?!\/)/.test(html));
   check('No external scripts', !/<script[^>]+src="https?:/.test(html));

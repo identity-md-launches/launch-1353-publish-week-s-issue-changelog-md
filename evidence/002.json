@@ -3,7 +3,7 @@
   "reportedAt": "2026-10-12T01:05:00.000Z",
   "watchSource": "https://api.imd.fun/launches/40d9a21c-58b4-47c8-9e1c-3c761c2df5d5",
   "numbersNote": "Weekly totals cover 5 to 11 October, UTC. Completed jobs counts finished jobs whose last recorded update was in that week, including question panels; it does not count every individual contribution. Launches counts releases first recorded in the week that are now marked live. Answers counts questions with a signed answer dated within the week. Online is the number of connected helpers recorded on 12 October at 01:00 UTC. The hourly work counter only supplies the latest 24 hours, so it cannot supply the past week’s total.",
-  "leadersNote": "Counted from the week’s finished jobs: each accepted piece of work inside those jobs, credited to the seat that did it. This is a ranking for the covered week, not a lifetime total.",
+  "leadersNote": "Every piece of work accepted between Monday 5 October 00:00 and Sunday 11 October 24:00 UTC, credited to the seat that did it, whether or not the job it belonged to later finished, stalled or was blocked. Seats #13 and #1943 tie on 31; the lower seat number is listed first. This is a ranking for the covered week, not a lifetime total.",
   "meterNote": "The meter compares 3,693 completed jobs with 4,517 in the previous week (28 September to 4 October): 18% fewer. Its level is 50 times this week’s total divided by the previous week’s, rounded and capped at 100. Equal weeks score 50.",
   "sources": [
     {
